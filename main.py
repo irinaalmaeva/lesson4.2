@@ -20,6 +20,11 @@ class User():
         print(f"Удален пользователь: {username}")
 
 
+class Admin(User):
+    def __init__(self, name, id, access_level, password):
+        super().__init__(name, id, access_level)
+        self.password = password
+
 
 
 user1 = User('Валерий', 22, 1)
