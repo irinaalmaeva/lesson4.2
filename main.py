@@ -26,19 +26,29 @@ class User():
     def display_info(self):
         print(f"Имя пользоавтеля: {self.__name}, имеет id: {self.__id} и уровень доступа: {self.__access_level}.")
 
+class Admin(User):
 
-    def add_user(self, username, id, access_level):
-        self.users = {username: [id, access_level]}
-        print(f"Добавлен новый пользователь:{username}, {id}, {access_level}.")
+    def __init__(self, name, id):
+        super().__init__(name, id,'admin ')
+        self.__users = {} # {username: [id, access_level]} # def get_users(self) = {} def set_users(self, users) = {} def get_access_level() = {}
+    def add_user(self, user):
+        self.__users[user.get_name()] = user # {username: [id, access_level]}
+        print(f"Добавлен новый пользователь: {user.get_name()}, {user.get_id()}, {user.get_access_level()}.")
 
-    def show_users(self , self_users = None):
-        print(f"Добавлен пользователь: {self.users}")
+
 
     def remove_user(self, username):
-        if username in self.users:
-            del self.users[username]
+        if username in self.__users:
+            del self.__users[username]
+            print(f"Удален пользователь: {username}")
+        else:
+            print("Пользователь {username} не найден.")
 
-        print(f"Удален пользователь: {username}")
+
+    def show_users(self):
+        print("Список пользователей:")
+        for username, user in self.__users.items():
+            print(f"Имя: {user.get_name()}, ID: {user.get_id()}, Уровень доступа: {user.get_access_level()}")
 
 
 
@@ -48,19 +58,25 @@ user1 = User('Валерий', 22222, "финансист")
 user2 = User('Мария', 33333, "кадровик")
 user3 = User('Ксения', 44444, "расчетчик")
 
-print(f"Имя пользоавтеля: {user1.name}, имеет id: {user1.id} и уровень доступа: {user1.access_level}.")
-print(f"Имя пользоавтеля: {user2.name}, имеет id: {user2.id} и уровень доступа: {user2.access_level}.")
-print(f"Имя пользоавтеля: {user3.name}, имеет id: {user2.id} и уровень доступа: {user2.access_level}.")
+
+user1.display_info()
+user2.display_info()
+user3.display_info()
+
+admin = Admin('Александр', 11111)
+
+admin.add_user(user1)
+admin.add_user(user2)
+admin.add_user(user3)
 
 
-user1.add_user('Борис',66666,"финансист")
-user2.add_user('Анна', 55555, "кадровик")
-user3.add_user('Михаил',77777,"расчетчик")
+admin.show_users()
 
+admin.remove_user('Ксения')
 
-user1.show_users()
-user2.show_users()
-user3.show_users()
+admin.show_users()
 
-user1.remove_user('Борис')
+admin.remove_user('Борис')
+
+admin.show_users()
 
