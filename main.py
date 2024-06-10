@@ -1,10 +1,31 @@
 class User():
 
     def __init__(self, name, id, access_level):
-        self.name = name
-        self.id = id
-        self.access_level = access_level
-        self.users = {}
+        self.__name = name
+        self.__id = id
+        self.__access_level = access_level
+
+    def get_name(self):
+        return self.__name
+
+    def set_name(self, name):
+        self.__name = name
+
+    def get_id(self):
+        return self.__id
+
+    def set_id(self, id):
+        self.__id = id
+
+    def get_access_level(self):
+        return self.__access_level
+
+    def set_access_level(self, access_level):
+        self.__access_level = access_level
+
+    def display_info(self):
+        print(f"Имя пользоавтеля: {self.__name}, имеет id: {self.__id} и уровень доступа: {self.__access_level}.")
+
 
     def add_user(self, username, id, access_level):
         self.users = {username: [id, access_level]}
